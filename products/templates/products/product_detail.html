@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{object.name}}<small><a href="{{object.get_absolute_url_edit}}">Edit</a></small></h2></h1>
+<p>Description: {{object.description}}</p>
+<p>Price: US${{object.price}}</p>
+{% if object.featured == True%}
+<p>Featured: Yes</p>
+{% else %}
+<p>Featured: No</p>
+{% endif %}
+{% if object.email == None%}
+<p>Contact email: -</p>
+{% else %}
+<p>Contact email: {{object.email}}</p>
+{% endif %}
+
+<p><a href="{{object.get_absolute_url_delete}}">Delete</a></p>
+
+{% endblock content %}
