@@ -15,10 +15,10 @@ class Article(models.Model):
         return reverse("article-detail", kwargs={"slug": self.slug})
 
     def get_absolute_url_edit(self):
-        return reverse("article-edit", kwargs={"id": self.id})
+        return reverse("article-edit", kwargs={"slug": self.slug})
 
     def get_absolute_url_delete(self):
-        return reverse("article-delete", kwargs={"id": self.id})
+        return reverse("article-delete", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         super(Article, self).save(*args, **kwargs)
