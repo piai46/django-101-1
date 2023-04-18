@@ -17,8 +17,9 @@ class ArticleDetailView(DetailView):
     template_name = 'blog/article_detail.html'
 
     def get_object(self):
-        id_ = self.kwargs.get('id')
-        return get_object_or_404(Article, id=id_)
+        # id_ = self.kwargs.get('id')
+        slug_ = self.kwargs.get('slug')
+        return get_object_or_404(Article, slug=slug_)
 
 
 class ArticleCreateView(CreateView):
