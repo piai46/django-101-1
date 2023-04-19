@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ProductForm, RawProductForm
@@ -9,13 +10,14 @@ from .models import Product
 
 def product_search_view(request):
     try:
-        query_id = int(request.GET.get('query'))
+        query = request.GET.get('query')
     except ValueError:
-        query_id = None
-    obj = None
-    if query_id is not None:
-        obj = get_object_or_404(Product, id=query_id)
-    context = {'obj': obj}
+        query = None
+    qs = Product.objects.all()
+    if query is not None:
+        lookups = Q(name__icontains=query) | Q(description__icontains=query)
+        qs = Product.objects.filter(lookups)
+    context = {'obj_list': qs}
     return render(request, 'products/product_search.html', context)
 
 
@@ -51,7 +53,7 @@ def product_create_view(request):
     form = ProductForm(request.POST or None)
     if form.is_valid():
         form.save()
-        form = ProductForm()
+        return redirect('/products/')
     context = {'form': form}
     return render(request, 'products/product_create.html', context=context)
 

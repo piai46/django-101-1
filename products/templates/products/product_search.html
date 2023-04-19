@@ -2,9 +2,10 @@
 
 {% block content %}
 
-{{obj.name}}
-{{obj.description}}
-{{obj.price}}
-{{obj.featured}}
+{% for obj in obj_list %}
+    {% if obj.name %}
+        <h1><a href="{{obj.get_absolute_url_detail}}">{{obj.name}}</a></h1>
+    {% endif %}
+{% endfor %}
 
 {% endblock content %}
