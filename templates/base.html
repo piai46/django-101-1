@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% comment %}
 
 <body>
     <nav>
@@ -28,10 +20,123 @@
     <h4><a href="/blog/create">Create a article</a></h4>
     <form action='/products/search/'>
         <p>Search PRODUCT by ID only </p>
-        <input type='text' name='query'/>
-        <input type='submit'/>
+        <input type='text' name='query' />
+        <input type='submit' />
     </form><br>
     {% block content %}replace me{% endblock content %}
+</body> {% endcomment %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minha Homepage</title>
+    <style>
+        /* Estilos para o botão de login e registro */
+        .login-btn,
+        .logout-btn,
+        .register-btn {
+            background-color: crimson;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 10px 10px 0;
+            cursor: pointer;
+            float: right;
+            /* alinhar à direita */
+            width: 120px;
+        }
+
+        /* Estilos para a barra de navegação */
+        .nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            float: left;
+            /* alinhar à esquerda */
+        }
+
+        .nav li {
+            display: inline-block;
+            /* mostrar itens na horizontal */
+            text-align: center;
+            /* centralizar o texto */
+            width: 100px;
+            margin: 10px 10px 10px 0;
+        }
+
+        .nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav li a:hover {
+            background-color: crimson;
+        }
+
+        /* Estilos para o container que envolve a barra de navegação e os botões de login e registro */
+        .container {
+            overflow: hidden;
+            background-color: #333;
+            float: right;
+            /* alinhar à direita */
+            margin: 5px 0px 0px 0;
+        }
+
+        .container_nav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        /* Limpar a float do container */
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .body-content {
+            border-left: 40px;
+            border-right: 40px;
+            border-top: 0px;
+            border-bottom: 0px;
+            border-style: solid;
+            border-color: crimson;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container_nav'>
+        <div class="container">
+            {% if not request.user.is_authenticated %}
+            <a href="/login/" target="_parent"><button class="login-btn">Login</button></a>
+            <a href="/register/" target="_parent"><button class="register-btn">Register</button></a>
+            {% else %}
+            <a href="/logout/" target="_parent"><button class="logout-btn">Logout</button></a>
+            <a href="/profiles/{{ request.user }}/" target="_parent"><button class="logout-btn">My profile</button></a>
+            {% endif %}
+        </div>
+        <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/products/">Products</a></li>
+            <li><a href="/blog/">Articles</a></li>
+            <li><a href="/recipes/">Recipes</a></li>
+        </ul>
+    </div>
+    <div class="body-content">
+        {% block content %}replace me{% endblock content %}
+    </div>
 </body>
 
 </html>
