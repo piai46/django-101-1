@@ -10,7 +10,7 @@ class Recipe(models.Model):
     created_at = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
-    def get_absolute_url_detail(self):
+    def get_absolute_url(self):
         return reverse("recipes-detail", kwargs={"id": self.id})
 
     def get_absolute_url_edit(self):

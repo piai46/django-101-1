@@ -3,6 +3,11 @@
 {% block content %}
 
 <h1>{{ obj.title }}<small> - created at {{ obj.created_at }}</small></h1>
+{% if obj.active %}
+<h3>Enable</h3>
+{% else %}
+<h3>Disable</h3>
+{% endif %}
 <p>{{ obj.description }}</p>
 
 {% endblock content %}

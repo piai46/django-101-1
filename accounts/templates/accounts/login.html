@@ -3,6 +3,7 @@
 {% block content %}
 
 {% if not request.user.is_authenticated %}
+    <h1>Please login to your account: </h1>
     <form method='POST'>{% csrf_token %}
         {% if error %}
         <p style='color: red'>{{error}}</p>
