@@ -24,6 +24,7 @@ def recipes_detail_view(request, slug):
 def recipes_create_view(request):
     form = RecipeForm(request.POST or None)
     if form.is_valid():
+        form.instance.user = request.user
         obj = form.save()
         return redirect(obj)
     context = {'form': form}
@@ -34,6 +35,8 @@ def recipes_create_view(request):
 def recipes_edit_view(request, slug):
     obj = get_object_or_404(Recipe, slug=slug)
     form = RecipeForm(request.POST or None, instance=obj)
+    if obj.user != request.user:
+        return redirect('../../')
     if form.is_valid():
         saved_obj = form.save()
         return redirect(saved_obj)
@@ -46,6 +49,8 @@ def recipes_edit_view(request, slug):
 @login_required
 def recipes_delete_view(request, slug):
     obj = get_object_or_404(Recipe, slug=slug)
+    if obj.user != request.user:
+        return redirect('../../')
     if request.method == 'POST':
         obj.delete()
         return redirect('../../')

@@ -3,14 +3,18 @@
 {% block content %}
 
 <h1>{{ obj.title }}<small> - created at {{ obj.created_at }} by {{ obj.user }}</small></h1>
-<h3><a href={{ obj.get_absolute_url_edit }}>Edit Recipe</a>
+{% if obj.user == request.user %}
+    <h3><a href={{ obj.get_absolute_url_edit }}>Edit Recipe</a>
+{% endif %}
 {% if obj.active %}
-<h3>Enable</h3>
+    <h3>Enable</h3>
 {% else %}
-<h3>Disable</h3>
+    <h3>Disable</h3>
 {% endif %}
 <p>{{ obj.description }}</p>
 
-<a href={{ obj.get_absolute_url_delete }}>Delete</a>
+{% if obj.user == request.user %}
+    <a href={{ obj.get_absolute_url_delete }}>Delete</a>
+{% endif %}
 
 {% endblock content %}
