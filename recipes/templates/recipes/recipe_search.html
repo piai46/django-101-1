@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for obj in obj_list %}
+    {% if obj.active %}
+        <h1><a href={{ obj.get_absolute_url }}>{{ obj.title }}</a>
+    {% endif %}
+{% endfor %}
+<h1>--> End of results <---</h1>
+
+{% endblock content %}
