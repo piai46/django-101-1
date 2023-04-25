@@ -1,11 +1,15 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
 # Create your models here.
 
+User = settings.AUTH_USER_MODEL
+
 
 class Recipe(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     created_at = models.DateField(auto_now_add=True)
