@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>{{ obj.title }}<small> - created at {{ obj.created_at }}</small></h1>
+<h3><a href={{ obj.get_absolute_url_edit }}>Edit Recipe</a>
 {% if obj.active %}
 <h3>Enable</h3>
 {% else %}
