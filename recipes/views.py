@@ -40,3 +40,15 @@ def recipes_edit_view(request, id):
         'form': form
     }
     return render(request, 'recipes/recipe_edit.html', context)
+
+
+@login_required
+def recipes_delete_view(request, id):
+    obj = get_object_or_404(Recipe, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('../../')
+    context = {
+        'object': obj
+    }
+    return render(request, 'recipes/recipe_delete.html', context)

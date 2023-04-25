@@ -11,4 +11,6 @@
 {% endif %}
 <p>{{ obj.description }}</p>
 
+<a href={{ obj.get_absolute_url_delete }}>Delete</a>
+
 {% endblock content %}
