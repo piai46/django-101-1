@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to {{ profile_name }}'s profile!</h1>
+<h2>Abaixo estão as receitas criadas pelo usuário de drogas acima:</h2>
+{% for obj in obj_list %}
+<h1><a href={{ obj.get_absolute_url }}>{{obj.title}}</a></h1>
+{% endfor %}
+
+{% endblock content %}

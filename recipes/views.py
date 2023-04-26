@@ -64,7 +64,7 @@ def recipes_search_view(request):
     query = request.GET['query']
     query_set = Recipe.objects.all()  # Para caso <query> for None, ele retorna Todos os resultados
     if query:
-        lookups = Q(title__icontains=query) | Q(description__icontains=query)
+        lookups = Q(title__icontains=query) | Q(description__icontains=query) | Q(user__username__icontains=query)
         query_set = Recipe.objects.filter(lookups)
     context = {
         'obj_list': query_set
