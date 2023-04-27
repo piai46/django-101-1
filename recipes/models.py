@@ -9,6 +9,8 @@ User = settings.AUTH_USER_MODEL
 
 
 class Recipe(models.Model):
+    # on_delete=SET_NULL para quando deletar, o user irá  ser NULL, blank e null precisam ser True
+    # on_delete=CASCADE para quando deletar, os objetos que conterem esse user, serão excluidos
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
@@ -17,13 +19,13 @@ class Recipe(models.Model):
     slug = models.SlugField(blank=True, null=True)
 
     def get_absolute_url(self):
-        return reverse("recipes-detail", kwargs={"slug": self.slug})
+        return reverse("recipes:detail", kwargs={"slug": self.slug})
 
-    def get_absolute_url_edit(self):
-        return reverse("recipes-edit", kwargs={"slug": self.slug})
+    def get_absolute_url_edit(self):  # get_edit_url()
+        return reverse("recipes:edit", kwargs={"slug": self.slug})
 
-    def get_absolute_url_delete(self):
-        return reverse("recipes-delete", kwargs={"slug": self.slug})
+    def get_absolute_url_delete(self):  # get_delete_url()
+        return reverse("recipes:delete", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         super(Recipe, self).save(*args, **kwargs)
