@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<center>
+<a href="/products/create/" target="_parent"><button class="center-btn">Create Product</button></a>
 {% for object in object_list %}
-<h2><a href="{{object.get_absolute_url_detail}}">{{ object.id }} - {{ object.name }}</a></h2>
+<h2><a href="{{object.get_absolute_url_detail}}">{{ object.name }}</a></h2>
 {% endfor %}
+</center>
 
 {% endblock content %}

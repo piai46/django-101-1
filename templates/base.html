@@ -1,108 +1,58 @@
-{% comment %}
-
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/contact/">Contact</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a href="/products/">Product list</a></li>
-            <li><a href="/blog/">Article list</a></li><br>
-            {% if not request.user.is_authenticated %}
-            <li><a href="/login/">Login</a></li>
-            {% else %}
-            <li><a href="/logout/">Logout</a></li>
-            {% endif %}
-            <li><a href="/register/">Register</a></li>
-        </ul>
-    </nav>
-    <h4><a href="/products/create">Create a product</a></h4>
-    <h4><a href="/blog/create">Create a article</a></h4>
-    <form action='/products/search/'>
-        <p>Search PRODUCT by ID only </p>
-        <input type='text' name='query' />
-        <input type='submit' />
-    </form><br>
-    {% block content %}replace me{% endblock content %}
-</body> {% endcomment %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Minha Homepage</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
-        /* Estilos para o botão de login e registro */
-        .login-btn,
-        .logout-btn,
-        .register-btn {
-            background-color: crimson;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin: 10px 10px 10px 0;
-            cursor: pointer;
-            float: right;
-            /* alinhar à direita */
-            width: 120px;
-        }
-
-        /* Estilos para a barra de navegação */
-        .nav {
+        .lista {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #333;
-            float: left;
-            /* alinhar à esquerda */
+            background-color: #333333;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
         }
 
-        .nav li {
-            display: inline-block;
-            /* mostrar itens na horizontal */
-            text-align: center;
-            /* centralizar o texto */
-            width: 100px;
-            margin: 10px 10px 10px 0;
-        }
-
-        .nav li a {
+        .lista a {
             display: block;
             color: white;
-            text-align: center;
-            padding: 14px 16px;
             text-decoration: none;
+            text-align: center;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        .nav li a:hover {
+        .lista a:hover {
             background-color: crimson;
         }
 
-        /* Estilos para o container que envolve a barra de navegação e os botões de login e registro */
-        .container {
-            overflow: hidden;
-            background-color: #333;
-            float: right;
-            /* alinhar à direita */
-            margin: 5px 0px 0px 0;
+        .search-container {
+            text-align: center;
+            width: 300px
         }
 
-        .container_nav {
-            overflow: hidden;
-            background-color: #333;
+        .search-container input[type=text] {
+            padding: 10px;
+            /* border: none; */
+            margin: 5px;
+            border-radius: 5px;
+            width: 50%;
+            margin-right: 5px;
         }
 
-        /* Limpar a float do container */
-        .container::after {
-            content: "";
-            clear: both;
-            display: table;
+        .search-container button {
+            background-color: crimson;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-
         .body-content {
             border-left: 40px;
             border-right: 40px;
@@ -111,10 +61,8 @@
             border-style: solid;
             border-color: crimson;
         }
-
         .center-btn {
             text-decoration: none;
-            display: block;
             margin: 0 auto;
             padding: 10px 20px;
             background-color: crimson;
@@ -127,27 +75,32 @@
 </head>
 
 <body>
-    <div class='container_nav'>
-        <div class="container">
-            {% if not request.user.is_authenticated %}
-            <a href="/login/" target="_parent"><button class="login-btn">Login</button></a>
-            <a href="/register/" target="_parent"><button class="register-btn">Register</button></a>
-            {% else %}
-            <a href="/logout/" target="_parent"><button class="logout-btn">Logout</button></a>
-            <a href="/profiles/{{ request.user }}/" target="_parent"><button class="logout-btn">My profile</button></a>
-            {% endif %}
-        </div>
-        <ul class="nav">
+    <nav>
+        <ul class="lista">
             <li><a href="/">Home</a></li>
             <li><a href="/contact/">Contact</a></li>
             <li><a href="/about/">About</a></li>
             <li><a href="/products/">Products</a></li>
             <li><a href="/blog/">Articles</a></li>
             <li><a href="/recipes/">Recipes</a></li>
+            <form action="search/" class="search-container">
+                <input type="text" name='query' placeholder="Pesquisar...">
+                <button type="submit">Search</button>
+            </form>
+            {% if not request.user.is_authenticated %}
+            <li><a href="/login/">Login</a></li>
+            <li><a href="/register/">Register</a></li>
+            {% else %}
+            <li><a href="/logout/">Logout</a></li>
+            <li><a href="/profiles/{{ request.user }}/">My
+                profile</a></li>
+            {% endif %}
         </ul>
-    </div>
+    </nav>
     <div class="body-content">
+        <center>
         {% block content %}replace me{% endblock content %}
+        </center>
     </div>
 </body>
 

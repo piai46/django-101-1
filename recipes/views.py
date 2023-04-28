@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import RecipeForm
@@ -58,15 +57,3 @@ def recipes_delete_view(request, slug):
         'object': obj
     }
     return render(request, 'recipes/recipe_delete.html', context)
-
-
-def recipes_search_view(request):
-    query = request.GET['query']
-    query_set = Recipe.objects.all()  # Para caso <query> for None, ele retorna Todos os resultados
-    if query:
-        lookups = Q(title__icontains=query) | Q(description__icontains=query) | Q(user__username__icontains=query)
-        query_set = Recipe.objects.filter(lookups)
-    context = {
-        'obj_list': query_set
-    }
-    return render(request, 'recipes/recipe_search.html', context)

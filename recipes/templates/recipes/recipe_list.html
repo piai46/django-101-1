@@ -1,44 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-    .search-container {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .search-container input[type=text] {
-        padding: 10px;
-        /* border: none; */
-        margin: 5px;
-        border-radius: 5px;
-        width: 50%;
-        margin-right: 5px;
-    }
-
-    .search-container button {
-        background-color: crimson;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-</style>
-
-<div class="search-container">
-    <form action="search/">
-        <input type="text" name='query' placeholder="Pesquisar...">
-        <button type="submit">Buscar</button>
-    </form>
-</div>
+<center>
 <a href="/recipes/create/" target="_parent"><button class="center-btn">Create Recipe</button></a>
 {% for obj in objects %}
 {% if obj.active %}
 <a href="{{obj.get_absolute_url}}">
-    <h1>{{ obj.title }}</h1>
+    <h2>{{ obj.title }}</h2>
 </a>
 {% endif %}
 {% endfor %}
-
+</center>
 {% endblock content %}

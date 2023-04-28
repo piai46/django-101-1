@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<center>
+<h1>Recipes:</h1>
+{% for obj in recipe_list %}
+    {% if obj.active %}
+        <h2><a href={{ obj.get_absolute_url }}>{{ obj.title }}</a></h2>
+    {% endif %}
+{% endfor %}
+<h1>Articles:</h1>
+{% for obj in article_list %}
+    <h2><a href={{ obj.get_absolute_url_detail }}>{{ obj.title }}</a></h2>
+{% endfor %}
+<h1>Products:</h1>
+{% for obj in product_list %}
+    <h2><a href={{ obj.get_absolute_url_detail }}>{{ obj.name }}</a></h2>
+{% endfor %}
+<h2>---> End of results <---</h2>
+</center>
+{% endblock content %}

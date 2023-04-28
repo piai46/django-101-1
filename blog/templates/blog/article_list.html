@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<center>
+    <a href="/blog/create/" target="_parent"><button class="center-btn">Create Article</button></a>
 {% for object in object_list %}
 <h2>
     <a href="{{object.get_absolute_url_detail}}">{{object.title}}</a>
-    {% if object.active %}
-    ON
-    {% else %}
-    OFF
-    {% endif %}
 </h2>
 {% endfor %}
+</center>
 {% endblock content %} 
