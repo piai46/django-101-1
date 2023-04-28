@@ -16,8 +16,7 @@ Including another URLconf
 from django.urls import path
 
 from .views import (product_create_view, product_delete_view,
-                    product_detail_view, product_edit_view, product_list_view,
-                    product_search_view)
+                    product_detail_view, product_edit_view, product_list_view)
 
 urlpatterns = [
     path('', product_list_view, name='product-list'),
@@ -25,5 +24,4 @@ urlpatterns = [
     path('<int:id>/edit/', product_edit_view, name='product-edit'),
     path('<int:id>/delete/', product_delete_view, name='product-delete'),
     path('<int:id>/', product_detail_view, name='product-detail'),
-    path('search/', product_search_view, name='product-search'),
 ]

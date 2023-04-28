@@ -1,24 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ProductForm, RawProductForm
 from .models import Product
 
 # Create your views here.
-
-
-def product_search_view(request):
-    try:
-        query = request.GET.get('query')
-    except ValueError:
-        query = None
-    qs = Product.objects.all()
-    if query is not None:
-        lookups = Q(name__icontains=query) | Q(description__icontains=query)
-        qs = Product.objects.filter(lookups)
-    context = {'obj_list': qs}
-    return render(request, 'products/product_search.html', context)
 
 
 def product_list_view(request):

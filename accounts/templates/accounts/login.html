@@ -1,19 +1,71 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 10px auto;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px #ccc;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border-radius: 4px;
+        border: none;
+        background-color: #fff;
+        box-shadow: 0px 0px 5px #ccc;
+    }
+
+    button[type="submit"] {
+        background-color: crimson;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: rgb(141, 8, 35);
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    a {
+        color: crimson;
+        text-decoration: none;
+    }
+</style>
 
 {% if not request.user.is_authenticated %}
-    <h1>Please login to your account: </h1>
-    <form method='POST'>{% csrf_token %}
+<div class="container">
+    <h1>Login</h1>
+    <form method="POST"> {% csrf_token %}
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
         {% if error %}
         <p style='color: red'>{{error}}</p>
         {% endif %}
-        <input type='text' name='username' placeholder='username'/>
-        <input type='password' name='password' placeholder='password'/>
         <button type='submit'>Login</button>
+        <br><a href="/register/">Não tem uma conta? Registre-se aqui</a>
     </form>
-    <p>Need an account? Please <a href='/register'> register</a></p>
+</div>
 {% else %}
-    <h1>You are already logged in. Would you like to <a href='/logout/'>logout?</a></h1>
+<h1>You are already logged in. Would you like to <a href='/logout/'>logout?</a></h1>
 {% endif %}
 {% endblock content %}
